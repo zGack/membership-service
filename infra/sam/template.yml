@@ -18,7 +18,7 @@ Resources:
             TableName: !Ref MembershipTable
       Environment:
         Variables:
-          SAMPLE_TABLE: !Ref MembershipTable
+          MEMBERSHIP_TABLE: !Ref MembershipTable
 
   MembershipTable:
     Type: AWS::Serverless::SimpleTable
