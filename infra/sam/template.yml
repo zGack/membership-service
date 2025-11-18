@@ -13,6 +13,19 @@ Resources:
       Handler: dist/main.handler
       Runtime: nodejs20.x
       Timeout: 20
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref MembershipTable
+      Environment:
+        Variables:
+          SAMPLE_TABLE: !Ref MembershipTable
+
+  MembershipTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      PrimaryKey:
+        Name: userId
+        Type: String
 
   EventRule:
     Type: AWS::Events::Rule
