@@ -4,13 +4,12 @@ import { MembershipRepository } from './adapters/out/membership.repository';
 import { ActivateMembershipPortIn } from './domain/ports/in/activate-membership.port';
 import { MembershipEventBridgeAdapter } from './adapters/in/membership-eventbridge.adapter';
 import { MembershipEventService } from './entrypoints/event/membership-event.service';
-import { MembershipDynamoDBAdapter } from './adapters/out/membership-dynamodb.adapter';
 
 @Module({
     providers: [
         {
             provide: 'MembershipRepositoryPort',
-            useClass: MembershipDynamoDBAdapter,
+            useClass: MembershipRepository,
         },
         {
             provide: 'ActivateMembershipPortIn',
