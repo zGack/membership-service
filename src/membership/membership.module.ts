@@ -1,15 +1,15 @@
 import { Module } from '@nestjs/common';
 import { ActivateMembershipUseCase } from './domain/usecases/activate-membership.usecase';
-import { MembershipRepository } from './adapters/out/membership.repository';
 import { ActivateMembershipPortIn } from './domain/ports/in/activate-membership.port';
 import { MembershipEventBridgeAdapter } from './adapters/in/membership-eventbridge.adapter';
 import { MembershipEventService } from './entrypoints/event/membership-event.service';
+import { MembershipDynamoDBAdapter } from './adapters/out/membership-dynamodb.adapter';
 
 @Module({
     providers: [
         {
             provide: 'MembershipRepositoryPort',
-            useClass: MembershipRepository,
+            useClass: MembershipDynamoDBAdapter,
         },
         {
             provide: 'ActivateMembershipPortIn',
