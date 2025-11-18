@@ -1,13 +1,13 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ActivateMembershipPortIn } from '../ports/in/activate-membership.port';
+import { MembershipRepository } from '../../adapters/out/membership.repository';
 import { Membership } from '../entities/membership.entity';
-import { MembershipDynamoDBAdapter } from '../../adapters/out/membership-dynamodb.adapter';
 
 @Injectable()
 export class ActivateMembershipUseCase implements ActivateMembershipPortIn {
     constructor(
         @Inject('MembershipRepositoryPort')
-        private readonly membershipDynamoDBAdapter: MembershipDynamoDBAdapter,
+        private readonly membershipRepository: MembershipRepository,
     ) {}
 
     private readonly logger = new Logger(ActivateMembershipUseCase.name);
@@ -22,7 +22,7 @@ export class ActivateMembershipUseCase implements ActivateMembershipPortIn {
             userId,
             donationId,
         );
-        await this.membershipDynamoDBAdapter.save(membership);
+        this.membershipRepository.save(membership);
 
         return Promise.resolve();
     }
