@@ -1,7 +1,7 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ActivateMembershipPortIn } from '../ports/in/activate-membership.port';
-import { MembershipRepository } from '../../adapters/out/membership.repository';
 import { Membership } from '../entities/membership.entity';
+import { MembershipDynamoDBAdapter } from 'src/membership/adapters/out/membership-dynamodb.adapter';
 
 @Injectable()
 export class ActivateMembershipUseCase implements ActivateMembershipPortIn {
