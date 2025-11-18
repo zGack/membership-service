@@ -7,7 +7,7 @@ import { MembershipDynamoDBAdapter } from '../../adapters/out/membership-dynamod
 export class ActivateMembershipUseCase implements ActivateMembershipPortIn {
     constructor(
         @Inject('MembershipRepositoryPort')
-        private readonly membershipDynamoDBAdapter: MembershipDynamoDBAdapter,
+        private readonly membershipRepository: MembershipDynamoDBAdapter,
     ) {}
 
     private readonly logger = new Logger(ActivateMembershipUseCase.name);
@@ -22,7 +22,7 @@ export class ActivateMembershipUseCase implements ActivateMembershipPortIn {
             userId,
             donationId,
         );
-        await this.membershipDynamoDBAdapter.save(membership);
+        await this.membershipRepository.save(membership);
 
         return Promise.resolve();
     }
